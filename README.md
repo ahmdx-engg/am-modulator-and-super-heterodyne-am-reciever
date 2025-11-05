@@ -8,7 +8,7 @@ The objective of this work was to explore the core analog principles behind AM g
 ## Project Motivation
 
 Modern communication systems depend heavily on IC-based RF modules and DSPs that conceal the inner analog operations.
-This project intentionally avoids such abstraction — focusing instead on fundamentals of modulation and frequency conversion using classical analog circuitry.
+This project intentionally avoids such abstraction and focusing instead on fundamentals of modulation and frequency conversion using classical analog circuitry.
 
 By constructing both the modulator and receiver from discrete components, we gain direct insight into:
 
@@ -19,7 +19,7 @@ The goal was not just to simulate a functioning circuit, but to understand and v
 
 ## System Overview
 
-*Transmitter — Amplitude Modulator*
+**Transmitter — Amplitude Modulator**
 
 The AM Modulator generates a high-frequency carrier signal and modulates it with a lower-frequency message input.
 Modulation is achieved using transistor-based balanced modulation, where the instantaneous amplitude of the carrier varies proportionally with the message voltage.
@@ -42,7 +42,7 @@ Result:
 
 A standard AM waveform with controlled modulation depth (typically 70–80%).
 
- *Receiver — Superheterodyne AM Receiver*
+**Receiver — Superheterodyne AM Receiver**
 
 The superheterodyne receiver converts the incoming RF signal to a fixed intermediate frequency (IF) before detection, ensuring consistent bandwidth and selectivity.
 
