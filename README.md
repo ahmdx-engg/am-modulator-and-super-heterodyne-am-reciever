@@ -73,7 +73,7 @@ The modulation process was achieved using a BJT-based collector modulated amplif
 A low-frequency audio source (around 1 kHz) served as the message input, while a high-frequency LC oscillator (ranging from 100–500 kHz) generated the carrier.
 
 The collector terminal of the transistor received the carrier signal, while the base was biased with the modulating signal.
-This caused the collector current — and hence the amplitude of the carrier — to vary in proportion to the instantaneous amplitude of the modulating signal.
+This caused the collector current and hence the amplitude of the carrier to vary in proportion to the instantaneous amplitude of the modulating signal.
 
 At the output, a tuned LC circuit selected the desired AM frequency while filtering out unwanted harmonics.
 The resulting waveform displayed clear amplitude variation, confirming successful amplitude modulation.
@@ -85,10 +85,10 @@ This structure offers higher sensitivity, selectivity, and stability compared to
 
 The RF tuning stage was built using a variable LC tank circuit to select the desired station frequency.
 This signal was then fed into a mixer stage, constructed using a transistor operating in a non-linear region, which also received input from a local oscillator.
-The non-linearity caused frequency mixing, generating sum and difference frequencies. The difference frequency (IF) — typically around 455 kHz — was selected using an LC filter.
+The non-linearity caused frequency mixing, generating sum and difference frequencies. The difference frequency (IF) typically around 455 kHz — was selected using an LC filter.
 
 The IF amplifier, also transistor-based, boosted the signal strength to make detection easier.
-Next, an envelope detector using a diode and RC filter extracted the original modulation envelope — effectively recovering the transmitted audio signal.
+Next, an envelope detector using a diode and RC filter extracted the original modulation envelope effectively recovering the transmitted audio signal.
 Finally, a common-emitter amplifier stage amplified the recovered signal to a level suitable for observation or driving a small speaker.
 
 Each of these stages was first simulated independently in Proteus and then connected sequentially to form the complete superheterodyne receiver.
