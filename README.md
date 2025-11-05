@@ -64,17 +64,36 @@ Uses a diode and RC network to recover the original audio envelope from the AM w
 A transistor-based common-emitter amplifier to reproduce the demodulated signal at audible levels.
 
 # Design Methodology
-Stage	Description	Components Used
-Oscillator	LC Tank + Transistor feedback loop	Inductor, Capacitor, BJT
-Modulator	Collector-modulated BJT circuit	BJT (e.g., 2N2222), RC coupling
-Mixer	Non-linear transistor mixer	BJT or dual-diode
-IF Stage	Tuned amplifier	LC tuned circuit, BJT
-Detector	Diode-based envelope detector	Diode (1N4148), RC filter
-Audio Stage	Transistor amplifier	BJT (e.g., BC547), capacitor coupling
 
-Each stage was individually tested and tuned for correct operation before integration.
+The design process was carried out in several iterative stages, ensuring that each subsystem functioned correctly before integration.
 
-🧠 Simulation & Analysis
+**1. AM Modulator Design**
+
+The modulation process was achieved using a BJT-based collector modulated amplifier, operating as a non-linear device to combine the carrier and message signals.
+A low-frequency audio source (around 1 kHz) served as the message input, while a high-frequency LC oscillator (ranging from 100–500 kHz) generated the carrier.
+
+The collector terminal of the transistor received the carrier signal, while the base was biased with the modulating signal.
+This caused the collector current — and hence the amplitude of the carrier — to vary in proportion to the instantaneous amplitude of the modulating signal.
+
+At the output, a tuned LC circuit selected the desired AM frequency while filtering out unwanted harmonics.
+The resulting waveform displayed clear amplitude variation, confirming successful amplitude modulation.
+
+**2. Superheterodyne Receiver Design**
+
+The receiver was designed to emulate the classical superheterodyne architecture, which converts the received RF signal to a constant intermediate frequency before detection.
+This structure offers higher sensitivity, selectivity, and stability compared to direct detection methods.
+
+The RF tuning stage was built using a variable LC tank circuit to select the desired station frequency.
+This signal was then fed into a mixer stage, constructed using a transistor operating in a non-linear region, which also received input from a local oscillator.
+The non-linearity caused frequency mixing, generating sum and difference frequencies. The difference frequency (IF) — typically around 455 kHz — was selected using an LC filter.
+
+The IF amplifier, also transistor-based, boosted the signal strength to make detection easier.
+Next, an envelope detector using a diode and RC filter extracted the original modulation envelope — effectively recovering the transmitted audio signal.
+Finally, a common-emitter amplifier stage amplified the recovered signal to a level suitable for observation or driving a small speaker.
+
+Each of these stages was first simulated independently in Proteus and then connected sequentially to form the complete superheterodyne receiver.
+
+## Simulation & Analysis
 
 The complete transmitter-receiver pair was simulated in Proteus, allowing real-time visualization of:
 
@@ -96,12 +115,13 @@ Clean demodulated output with minimal distortion
 
 ## Observations
 
-**Parameter	                                          Modulator Output                                  	Receiver Output**
+During simulation, the AM modulator produced a clear waveform showing amplitude variation corresponding to the input message.
+By observing the modulator output on a virtual oscilloscope, the modulation depth was estimated to be around 70–80%, ensuring efficient modulation without distortion.
 
-Carrier Frequency	                                    100–500 kHz	                                      Tuned via LO
-Modulation Frequency	                                1 kHz	                                            1 kHz (audio recovered)
-Modulation Depth                                    	~75%	                                            Preserved post demodulation
-IF Frequency	                                        —	                                                ~455 kHz
-Audio Output	                                        —	                                                Clear and distortion-free
+At the receiver end, when the RF tuning circuit was aligned with the transmitter’s carrier frequency, a stable signal was received and mixed down to the intermediate frequency.
+The IF waveform displayed a clean envelope, and the subsequent demodulation stage successfully recovered the original 1 kHz audio tone.
 
-The project successfully demonstrated both modulation and superheterodyne reception entirely through discrete analog circuits.
+Varying the local oscillator frequency verified the principle of heterodyning — as the IF remained constant while the RF input changed, demonstrating the characteristic advantage of the superheterodyne topology.
+The audio amplifier output reproduced the same waveform as the transmitted message, confirming accurate signal recovery with minimal distortion.
+
+Overall, the system successfully demonstrated the end-to-end transmission and reception of an amplitude-modulated signal using only analog discrete components.
